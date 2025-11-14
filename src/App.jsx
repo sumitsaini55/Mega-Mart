@@ -21,7 +21,7 @@ export default function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage />} />
       </Routes>
-      <Footer />
+      
     </CartProvider>
   );
 }

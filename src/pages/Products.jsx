@@ -24,7 +24,7 @@ export default function Products({ search = "", category = "" }) {
     });
   }, [products, search, category]);
 
-  if (loading) return <div className="py-20 text-center">Loading products...</div>;
+  if (loading) return <div className="py-16 text-center">Loading products...</div>;
 
   return (
     <div className="section mx-4">
@@ -34,15 +34,15 @@ export default function Products({ search = "", category = "" }) {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="py-20 text-center">No products found</div>
+        <div className="py-16 text-center">No products found</div>
       ) : (
         <div className="product-grid">
           {filtered.map(p => (
             <div key={p.id}>
               <ProductCard product={p} />
               <div className="mt-3 flex gap-2">
-                <button onClick={() => addToCart(p)} className="btn-accent">Add</button>
-                <a href={`/product/${p.id}`} className="btn-primary">View</a>
+                <button onClick={() => addToCart(p)} className="btn-accent w-full sm:w-auto">Add</button>
+                <a href={`/product/${p.id}`} className="btn-primary w-full sm:w-auto text-center">View</a>
               </div>
             </div>
           ))}

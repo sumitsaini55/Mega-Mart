@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 import { useCart } from "../context/CartContext";
@@ -17,8 +16,7 @@ export default function Home({ search = "", category = "", setCategory }) {
       .then((r) => r.json())
       .then((data) => {
         setItems(data || []);
-        const unique = Array.from(new Set((data || []).map((d) => d.category?.name))).slice(0, 12);
-        setCats(unique);
+        setCats(Array.from(new Set((data || []).map((d) => d.category?.name))).slice(0, 12));
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -33,24 +31,25 @@ export default function Home({ search = "", category = "", setCategory }) {
 
   return (
     <>
-      <section className="mx-4 mt-6">
+      <section className="mx-4">
         <div className="hero rounded-xl overflow-hidden shadow-fut-1 relative">
           <img src={HERO} alt="MegaMart banner" className="hero-img" />
           <div className="hero-overlay">
-            <h1 className="text-3xl font-extrabold">MegaMart — Festival Offers</h1>
+            <h1 className="text-2xl md:text-3xl font-extrabold">MegaMart — Festival Offers</h1>
             <p className="mt-2 max-w-lg">Fresh deals on groceries, electronics and more — delivered fast.</p>
             <div className="mt-4">
-              <Link to="/products" className="btn-primary">Shop Now</Link>
+              <a href="/products" className="btn-primary">Shop Now</a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section mx-4 mt-8">
+      <section className="section mx-4 mt-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">Shop by Category</h2>
-          <Link to="/products" className="text-sm text-slate-600">See all</Link>
+          <h2 className="text-lg md:text-xl font-bold">Shop by Category</h2>
+          <a href="/products" className="text-sm text-slate-600">See all</a>
         </div>
+
         <div className="flex flex-wrap gap-3">
           {cats.map((c) => (
             <button
@@ -64,24 +63,24 @@ export default function Home({ search = "", category = "", setCategory }) {
         </div>
       </section>
 
-      <section className="section mx-4">
+      <section className="section mx-4 mt-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">Top Picks</h2>
+          <h2 className="text-lg md:text-xl font-bold">Top Picks</h2>
           <div className="text-sm text-slate-600">{filtered.length} items</div>
         </div>
 
         {loading ? (
-          <div className="py-20 text-center">Loading...</div>
+          <div className="py-16 text-center">Loading...</div>
         ) : filtered.length === 0 ? (
-          <div className="py-20 text-center">No products found</div>
+          <div className="py-16 text-center">No products found</div>
         ) : (
           <div className="product-grid">
             {filtered.slice(0, 12).map((p) => (
               <div key={p.id}>
                 <ProductCard product={p} />
                 <div className="mt-3 flex gap-2">
-                  <button onClick={() => addToCart(p)} className="btn-accent">Add</button>
-                  <Link to={`/product/${p.id}`} className="btn-primary">View</Link>
+                  <button onClick={() => addToCart(p)} className="btn-accent w-full sm:w-auto">Add</button>
+                  <a href={`/product/${p.id}`} className="btn-primary w-full sm:w-auto text-center">View</a>
                 </div>
               </div>
             ))}
