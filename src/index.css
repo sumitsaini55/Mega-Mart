@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Custom utility shadows (Tailwind-safe) ---------- */
+@layer utilities {
+  .shadow-fut-1 { box-shadow: 0 12px 30px rgba(6,30,40,0.06); }
+  .shadow-fut-2 { box-shadow: 0 20px 60px rgba(6,30,40,0.08); }
+  .glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(250,250,252,0.6));
+    backdrop-filter: blur(6px) saturate(120%);
+    border: 1px solid rgba(255,255,255,0.6);
+  }
+}
+
+/* ---------- tiny animations ---------- */
+@keyframes floaty {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+.fade-in { animation: fadeIn .42s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- global ---------- */
+body {
+  @apply bg-gradient-to-b from-slate-50 to-slate-100 text-slate-900 antialiased;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  @apply sticky top-0 z-50 flex items-center justify-between gap-4 px-4 py-3 glass;
+}
+.logo-mark {
+  @apply w-10 h-10 rounded-lg flex items-center justify-center text-white font-extrabold;
+  background: linear-gradient(135deg,#06b6d4,#06bfa8);
+  transform: rotate(-6deg);
+  box-shadow: 0 8px 26px rgba(6,182,212,0.12);
+}
+.search-input {
+  @apply w-full px-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-300;
+}
+
+/* ---------- HERO / BANNER ---------- */
+.hero {
+  @apply mx-4 mt-6 rounded-xl overflow-hidden relative;
+  height: 360px;
+}
+.hero-img { @apply w-full h-full object-cover; }
+.hero-overlay {
+  @apply absolute inset-0 flex flex-col justify-center pl-8 text-white;
+  background: linear-gradient(90deg, rgba(2,6,23,0.24), rgba(2,6,23,0.02));
+}
+
+/* CTA */
+.btn-primary {
+  @apply inline-block px-4 py-2 rounded-xl font-bold text-white shadow;
+  background: linear-gradient(90deg,#06b6d4,#06bfa8);
+}
+.btn-accent {
+  @apply inline-block px-4 py-2 rounded-xl font-bold text-slate-900;
+  background: linear-gradient(90deg,#ffd166,#ffb86b);
+}
+
+/* ---------- PRODUCT GRID ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+/* product card */
+.product-card {
+  @apply bg-white rounded-xl p-4 flex flex-col gap-3 transition-transform duration-300;
+  box-shadow: 0 10px 30px rgba(6,18,29,0.06);
+  border: 1px solid rgba(9,11,16,0.02);
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(6,30,40,0.08); }
+.product-thumb {
+  @apply bg-slate-50 rounded-md flex items-center justify-center overflow-hidden p-4;
+  height: 180px;
+}
+.product-thumb img { object-fit: contain; width: auto; height: 100%; }
+
+/* title/price */
+.product-title { @apply text-sm font-semibold text-slate-800 line-clamp-2; }
+.product-price { @apply text-lg font-extrabold text-teal-600; }
+
+/* actions */
+.product-actions { @apply mt-auto flex gap-2 items-center; }
+
+/* ---------- PRODUCT DETAILS ---------- */
+.detail-wrap {
+  @apply mx-4 my-8;
+}
+.detail-card {
+  @apply max-w-5xl mx-auto bg-white rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-6 p-6 shadow-fut-2;
+}
+.detail-left { @apply p-4 flex flex-col gap-4; }
+.detail-main {
+  @apply bg-slate-50 rounded-xl flex items-center justify-center p-6;
+  min-height: 360px;
+}
+.detail-main img { max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 12px; transition: transform .35s ease; }
+.detail-main img:hover { transform: scale(1.03); }
+
+.thumbs {
+  @apply flex gap-3 mt-2 flex-wrap;
+}
+.thumb-btn {
+  @apply w-20 h-14 rounded-md overflow-hidden border border-slate-200 bg-white flex items-center justify-center cursor-pointer;
+}
+.thumb-btn img { object-fit: cover; width:100%; height:100%; }
+
+/* info column */
+.detail-info { @apply p-3 md:p-6 flex flex-col gap-4; }
+.detail-title { @apply text-2xl font-extrabold text-slate-900; }
+.detail-price { @apply text-2xl font-extrabold text-teal-600; }
+.detail-desc { @apply text-slate-700 leading-relaxed; }
+
+/* detail actions */
+.detail-actions { @apply flex gap-3 mt-4; }
+
+/* ---------- CART ---------- */
+.cart-container { @apply max-w-5xl mx-auto p-6; }
+.cart-item {
+  @apply bg-white p-4 rounded-lg flex gap-4 items-center shadow;
+}
+.qty-input {
+  @apply w-20 text-center border rounded-md px-2 py-1;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .hero { height: 240px; }
+  .product-thumb { height: 140px; }
+  .detail-main { min-height: 260px; }
+}

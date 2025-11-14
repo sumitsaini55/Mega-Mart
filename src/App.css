@@ -1,0 +1,20 @@
+/* Improve grid spacing */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Better section titles */
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1f2937;
+  text-align: center;
+}
+
+/* Fix container padding */
+.container {
+  padding-top: 20px;
+}
